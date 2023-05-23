@@ -52,8 +52,13 @@ def hacker_news_proxy(request: HttpRequest) -> HttpResponse:
     for element in soup.find_all(text=True):
         modify_element(element)
 
-    change_elements(soup=soup, element_name="img", attr_name="src", url=url)
-    change_elements(soup=soup, element_name="script", attr_name="src", url=url)
-    change_elements(soup=soup, element_name="link", attr_name="href", url=url)
+    for element_name, attr_name in [
+        ("img", "src"),
+        ("script", "src"),
+        ("link", "href"),
+    ]:
+        change_elements(
+            soup=soup, element_name=element_name, attr_name=attr_name, url=url
+        )
 
     return HttpResponse(soup)
