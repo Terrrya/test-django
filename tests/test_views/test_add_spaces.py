@@ -20,7 +20,7 @@ class AddSpacesTests(TestCase):
             "</body>"
             "</html>"
         )
-        self.soup = BeautifulSoup(page)
+        self.soup = BeautifulSoup(page, "html.parser")
         self.elements = self.soup.find_all(text=True)
 
     def test_add_spaces_do_nothing_if_no_spaces_begin_end(self) -> None:
