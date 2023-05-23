@@ -40,7 +40,6 @@ def modify_element(element: BeautifulSoup) -> BeautifulSoup:
         ]
         add_spaces(element, modified_words)
         element.string.replace_with(" ".join(modified_words))
-    return element
 
 
 def hacker_news_proxy(request: HttpRequest) -> HttpResponse:
