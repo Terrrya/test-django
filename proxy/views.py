@@ -2,7 +2,7 @@ from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 BASE_URL = "https://news.ycombinator.com"
 
@@ -43,7 +43,7 @@ def modify_element(element: BeautifulSoup) -> BeautifulSoup:
     return element
 
 
-def hacker_news_proxy(request):
+def hacker_news_proxy(request: HttpRequest) -> HttpResponse:
     url = urljoin(BASE_URL, request.get_full_path())
 
     response = requests.get(url)
