@@ -18,7 +18,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py runserver 127.0.01:8232
+python manage.py runserver 127.0.0.1:8232
 ```
 
 ### Run with docker
@@ -32,3 +32,6 @@ cd test-django
 docker build -t hackernewsproxy .
 docker run -p 8232:8232 hackernewsproxy
 ```
+
+### Using
+Now you can run in your browser 127.0.0.1:8232 and use it.
