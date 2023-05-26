@@ -31,7 +31,7 @@ def hacker_news_proxy(request: HttpRequest) -> HttpResponse:
 
     for ext in EXT_CONTENT_TYPE.keys():
         if ext in path:
-            with open(path, "r") as f:
+            with open(path, "rb") as f:
                 file = f.read()
 
             return HttpResponse(file, content_type=EXT_CONTENT_TYPE[ext])
@@ -39,9 +39,10 @@ def hacker_news_proxy(request: HttpRequest) -> HttpResponse:
     soup = BeautifulSoup(response.content, "html.parser")
 
     for element in soup.find_all(text=True):
-        element.string.replace_with(
-            re.sub(r"\b\w{6}\b", lambda word: word.group() + "™", element)
-        )
+        if not element.startswith("http"):
+            element.string.replace_with(
+                re.sub(r"\b\w{6}\b", lambda word: word.group() + "™", element)
+            )
 
     for element_name, attr_name in [
         ("img", "src"),
